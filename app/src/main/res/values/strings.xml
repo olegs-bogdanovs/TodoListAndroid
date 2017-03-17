@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TODO List</string>
+    <string name="todo_title">Title</string>
+    <string name="todo_title_hint">Enter a title for the TODO.</string>
+    <string name="todo_description_hint">Enter a description for the TODO</string>
+    <string name="todo_description">Description</string>
 </resources>
