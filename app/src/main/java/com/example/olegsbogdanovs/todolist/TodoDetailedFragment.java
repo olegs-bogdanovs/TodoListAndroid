@@ -94,10 +94,35 @@ public class TodoDetailedFragment extends Fragment {
         });
 
         mRadioGroup = (RadioGroup)view.findViewById(R.id.todo_radiogroup);
+        switch (mTodo.getColor()){
+            case GREEN:
+                mRadioGroup.check(R.id.todo_radioButton_green);
+                break;
+            case RED:
+                mRadioGroup.check(R.id.todo_radioButton_red);
+                break;
+            case YELLOW:
+                mRadioGroup.check(R.id.todo_radioButton_yellow);
+                break;
+            default:
+                mRadioGroup.check(R.id.todo_radioButton_yellow);
+        }
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
+                switch (checkedId){
+                    case R.id.todo_radioButton_green:
+                        mTodo.setColor(GREEN);
+                        break;
+                    case R.id.todo_radioButton_red:
+                        mTodo.setColor(RED);
+                        break;
+                    case R.id.todo_radioButton_yellow:
+                        mTodo.setColor(YELLOW);
+                        break;
+                    default:
+                        mTodo.setColor(YELLOW);
+                }
             }
         });
 

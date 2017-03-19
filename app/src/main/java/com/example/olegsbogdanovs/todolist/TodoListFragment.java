@@ -76,16 +76,29 @@ public class TodoListFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private class TodoHolder extends RecyclerView.ViewHolder {
+    private class TodoHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView mTitleTextView;
         private LinearLayout mLinearLayout;
+        private Todo mtodo;
 
         TodoHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.todo_list_item_title);
             mLinearLayout = (LinearLayout) itemView;
 
+        }
+
+        void bindTodo(Todo todo){
+            mtodo = todo;
+            mTitleTextView.setText(todo.getTitle());
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = TodoDetailedActivity.createIntent(getActivity(), mtodo.getId());
+            startActivity(intent);
         }
     }
 
@@ -107,15 +120,7 @@ public class TodoListFragment extends Fragment {
         @Override
         public void onBindViewHolder(TodoHolder holder, int position) {
             Todo todo = mTodos.get(position);
-            holder.mTitleTextView.setText(todo.getTitle());
-//            switch (todo.getColor()){
-//                case (RED):
-//                    int color = ContextCompat.getColor(getActivity(), R.color.red);
-//                    holder.mLinearLayout.setBackgroundColor(color);
-//                    break;
-//                case default:
- //           }
-
+            holder.bindTodo(todo);
         }
 
         @Override

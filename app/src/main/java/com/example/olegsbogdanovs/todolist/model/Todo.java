@@ -18,6 +18,7 @@ public class Todo {
     public Todo(UUID id){
         mId = id;
         mDate = new Date();
+        mColor = "yellow";
     }
 
     public Todo(){
