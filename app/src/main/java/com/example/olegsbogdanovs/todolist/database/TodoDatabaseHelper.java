@@ -17,7 +17,7 @@ public class TodoDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table" + TodoTable.NAME + "(" +
+        db.execSQL("create table " + TodoTable.NAME + "(" +
                 "_id integer primary key autoincrement, " +
                 TodoTable.Cols.UUID + ", " +
                 TodoTable.Cols.TITLE + ", " +

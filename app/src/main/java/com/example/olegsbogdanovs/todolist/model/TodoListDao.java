@@ -61,6 +61,7 @@ public class TodoListDao {
     public List<Todo> getTodos(){
         List<Todo> todos = new ArrayList<>();
 
+
         TodoCursorWrapper cursorWrapper = queryCrimes(null, null);
 
         try {

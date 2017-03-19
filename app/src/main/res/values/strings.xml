@@ -6,4 +6,5 @@
     <string name="todo_description">Description</string>
     <string name="todo_color">Color</string>
     <string name="todo_photo">Photo</string>
+    <string name="add_todo">New TODO</string>
 </resources>

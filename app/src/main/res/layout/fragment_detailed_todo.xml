@@ -29,7 +29,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <TextView
             android:padding="16dp"
             android:textStyle="bold"
@@ -40,30 +39,34 @@
             android:text="@string/todo_color"/>
 
         <RadioGroup
+            android:id="@+id/todo_radiogroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingBottom="16dp">
 
             <RadioButton
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:id="@+id/todo_radioButton_red"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="@drawable/red_button_selector"
                 android:button="@null"/>
             <RadioButton
+                android:id="@+id/todo_radioButton_green"
                 android:button="@null"
                 android:background="@drawable/green_button_selector"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"/>
             <RadioButton
+                android:id="@+id/todo_radioButton_yellow"
                 android:button="@null"
                 android:background="@drawable/yellow_button_selector"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"/>
