@@ -31,6 +31,7 @@ public class TodoListFragment extends Fragment {
     public static final String RED = "red";
     public static final String GREEN = "green";
     public static final String YELLOW = "yellow";
+    public static final int REQUEST_THEME_PREFERENCE_CHANGED = 10;
 
 
     @Override
@@ -77,7 +78,7 @@ public class TodoListFragment extends Fragment {
                 return true;
             case R.id.menu_item_settings:
                 Intent prefIntent = new Intent(getActivity(), TodoPreferenceActivity.class);
-                startActivity(prefIntent);
+                getActivity().startActivityForResult(prefIntent, REQUEST_THEME_PREFERENCE_CHANGED);
                 return true;
         }
         return super.onOptionsItemSelected(item);

@@ -1,11 +1,13 @@
 package com.example.olegsbogdanovs.todolist;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.util.UUID;
 
@@ -41,6 +43,25 @@ public class TodoListActivity extends AppCompatActivity {
                     .commit();
         }
 
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK){
+            return;
+        }
+
+        if (requestCode == TodoListFragment.REQUEST_THEME_PREFERENCE_CHANGED){
+            if (data == null){
+                return;
+            }
+            startActivity(new Intent(this, TodoListActivity.class));
+            finish();
+        }
+
+
+        super.onActivityResult(requestCode, resultCode, data);
 
     }
 }
