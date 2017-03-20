@@ -20,6 +20,8 @@ import android.widget.TextView;
 import com.example.olegsbogdanovs.todolist.model.Todo;
 import com.example.olegsbogdanovs.todolist.model.TodoListDao;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 
@@ -80,12 +82,14 @@ public class TodoListFragment extends Fragment {
 
         private TextView mTitleTextView;
         private LinearLayout mLinearLayout;
+        private TextView mDateTextView;
         private Todo mtodo;
 
         TodoHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.todo_list_item_title);
+            mDateTextView = (TextView) itemView.findViewById(R.id.todo_list_item_date);
             mLinearLayout = (LinearLayout) itemView;
 
         }
@@ -93,6 +97,7 @@ public class TodoListFragment extends Fragment {
         void bindTodo(Todo todo){
             mtodo = todo;
             mTitleTextView.setText(todo.getTitle());
+            mDateTextView.setText(todo.getDate().toString());
         }
 
         @Override
