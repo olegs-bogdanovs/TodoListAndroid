@@ -6,4 +6,10 @@
         android:icon="@drawable/ic_add_menu"
         android:title="@string/add_todo"
         app:showAsAction="ifRoom|withText"/>
+
+    <item
+        android:id="@+id/menu_item_settings"
+        android:icon="@drawable/ic_settings_menu"
+        android:title="@string/todo_settings"
+        app:showAsAction="ifRoom"/>
 </menu>

@@ -6,4 +6,8 @@
     <color name="red">#ffe2e2</color>
     <color name="green">#d1ffdd</color>
     <color name="yellow">#fdffc9</color>
+    <color name="colorPrimaryRed">#ed4545</color>
+    <color name="colorPrimaryDarkRed">#d33c3c</color>
+    <color name="colorAccentRed">#510b0b</color>
+
 </resources>

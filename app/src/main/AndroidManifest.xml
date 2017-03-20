@@ -18,6 +18,9 @@
         <activity android:name=".TodoDetailedActivity">
 
         </activity>
+        <activity android:name=".TodoPreferenceActivity">
+
+        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="username"
+        android:title="Name"
+        android:summary="Please enter your username"/>
+
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/themesList"
+        android:entryValues="@array/themesValuesList"
+        android:key="themeType"
+        android:summary="Choose theme for TODO List app"
+        android:title="Theme"/>
+</PreferenceScreen>

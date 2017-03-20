@@ -37,6 +37,7 @@ public class TodoListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -74,9 +75,14 @@ public class TodoListFragment extends Fragment {
                 Intent intent = TodoDetailedActivity.createIntent(getActivity(), todo.getId());
                 startActivity(intent);
                 return true;
+            case R.id.menu_item_settings:
+                Intent prefIntent = new Intent(getActivity(), TodoPreferenceActivity.class);
+                startActivity(prefIntent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     private class TodoHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 

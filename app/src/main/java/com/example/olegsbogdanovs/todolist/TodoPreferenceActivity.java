@@ -2,18 +2,14 @@ package com.example.olegsbogdanovs.todolist;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 
-import java.util.UUID;
+/**
+ * Created by olegs.bogdanovs on 3/20/2017.
+ */
 
-
-public class TodoListActivity extends AppCompatActivity {
-
-
-
+public class TodoPreferenceActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -29,18 +25,8 @@ public class TodoListActivity extends AppCompatActivity {
                 break;
         }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.todo_fragment_activity);
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentById(R.id.todo_fragment_container);
-
-        if (fragment == null){
-            fragment = new TodoListFragment();
-            fragmentManager.beginTransaction()
-                    .add(R.id.todo_fragment_container, fragment)
-                    .commit();
-        }
-
-
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new TodoPreferenceFragment())
+                .commit();
     }
 }

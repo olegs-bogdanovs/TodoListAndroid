@@ -9,4 +9,5 @@
     <string name="todo_color">Color</string>
     <string name="todo_photo">Photo</string>
     <string name="add_todo">New TODO</string>
+    <string name="todo_settings">Settings</string>
 </resources>
