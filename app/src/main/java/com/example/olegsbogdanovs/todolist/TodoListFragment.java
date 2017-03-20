@@ -28,9 +28,9 @@ import java.util.List;
 public class TodoListFragment extends Fragment {
     private RecyclerView mTodoRecyclerView;
     private TodoAdapter mTodoAdapter;
-    private static final String RED = "red";
-    private static final String GREEN = "green";
-    private static final String YELLOW = "yellow";
+    public static final String RED = "red";
+    public static final String GREEN = "green";
+    public static final String YELLOW = "yellow";
 
 
     @Override
@@ -98,6 +98,20 @@ public class TodoListFragment extends Fragment {
             mtodo = todo;
             mTitleTextView.setText(todo.getTitle());
             mDateTextView.setText(todo.getDate().toString());
+            switch (todo.getColor()){
+                case RED:
+                    int redColor = ContextCompat.getColor(getActivity(), R.color.red);
+                    mLinearLayout.setBackgroundColor(redColor);
+                    break;
+                case GREEN:
+                    int greenColor = ContextCompat.getColor(getActivity(), R.color.green);
+                    mLinearLayout.setBackgroundColor(greenColor);
+                    break;
+                case YELLOW:
+                    int yellowColor = ContextCompat.getColor(getActivity(), R.color.yellow);
+                    mLinearLayout.setBackgroundColor(yellowColor);
+                    break;
+            }
         }
 
         @Override

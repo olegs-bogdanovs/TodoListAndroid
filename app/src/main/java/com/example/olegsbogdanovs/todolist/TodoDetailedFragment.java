@@ -1,10 +1,14 @@
 package com.example.olegsbogdanovs.todolist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -41,6 +45,7 @@ public class TodoDetailedFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID todoId = (UUID)getArguments().getSerializable(TODO_ID);
         mTodo = TodoListDao.get(getActivity()).getTodo(todoId);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -128,5 +133,22 @@ public class TodoDetailedFragment extends Fragment {
 
 
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_todo_detailed_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_item_delete_todo:
+                TodoListDao.get(getActivity()).removeTodo(mTodo);
+                getActivity().finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
