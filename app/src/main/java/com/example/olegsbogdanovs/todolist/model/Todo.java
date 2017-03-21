@@ -1,5 +1,6 @@
 package com.example.olegsbogdanovs.todolist.model;
 
+import java.io.File;
 import java.util.Date;
 import java.util.UUID;
 
@@ -68,4 +69,9 @@ public class Todo {
     public void setDate(Date date) {
         mDate = date;
     }
+
+    public String getPhotoFilename(){
+        return "IMG_" + getId().toString() + ".jpg";
+    }
+
 }

@@ -99,6 +99,22 @@
                     android:textAllCaps="true"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
+                
+                <ImageView
+                    android:id="@+id/todo_photo"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@android:color/darker_gray"
+                    android:scaleType="centerCrop"
+
+                    />
+                <Button
+                    android:id="@+id/todo_camera"
+                    android:layout_marginStart="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/take_photo"/>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
