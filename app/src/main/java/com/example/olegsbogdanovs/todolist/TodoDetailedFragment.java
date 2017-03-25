@@ -23,6 +23,7 @@ import android.widget.RadioGroup;
 
 import com.example.olegsbogdanovs.todolist.model.Todo;
 import com.example.olegsbogdanovs.todolist.model.TodoListDao;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.UUID;
@@ -127,6 +128,7 @@ public class TodoDetailedFragment extends Fragment {
             default:
                 mRadioGroup.check(R.id.todo_radioButton_yellow);
         }
+
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -169,12 +171,7 @@ public class TodoDetailedFragment extends Fragment {
     }
 
     private void updatePhotoView() {
-        if (mPhotoFile == null || !mPhotoFile.exists()){
-            mPhotoView.setImageDrawable(null);
-        } else {
-            Bitmap bitmap = PhotoUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
-            mPhotoView.setImageBitmap(bitmap);
-        }
+        Picasso.with(getActivity()).load(mPhotoFile).resize(200,200).skipMemoryCache().centerCrop().into(mPhotoView);
     }
 
     @Override

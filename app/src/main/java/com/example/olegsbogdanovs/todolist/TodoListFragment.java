@@ -1,6 +1,7 @@
 package com.example.olegsbogdanovs.todolist;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,14 +15,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.olegsbogdanovs.todolist.model.Todo;
 import com.example.olegsbogdanovs.todolist.model.TodoListDao;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.util.List;
 
 
@@ -90,6 +94,7 @@ public class TodoListFragment extends Fragment {
         private TextView mTitleTextView;
         private LinearLayout mLinearLayout;
         private TextView mDateTextView;
+        private ImageView mPhotoImageView;
         private Todo mtodo;
 
         TodoHolder(View itemView) {
@@ -97,6 +102,7 @@ public class TodoListFragment extends Fragment {
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.todo_list_item_title);
             mDateTextView = (TextView) itemView.findViewById(R.id.todo_list_item_date);
+            mPhotoImageView = (ImageView) itemView.findViewById(R.id.todo_list_item_image_view);
             mLinearLayout = (LinearLayout) itemView;
 
         }
@@ -105,6 +111,8 @@ public class TodoListFragment extends Fragment {
             mtodo = todo;
             mTitleTextView.setText(todo.getTitle());
             mDateTextView.setText(todo.getDate().toString());
+            File photoFile = TodoListDao.get(getActivity()).getPhotoFile(todo);
+
             switch (todo.getColor()){
                 case RED:
                     int redColor = ContextCompat.getColor(getActivity(), R.color.red);
@@ -118,7 +126,16 @@ public class TodoListFragment extends Fragment {
                     int yellowColor = ContextCompat.getColor(getActivity(), R.color.yellow);
                     mLinearLayout.setBackgroundColor(yellowColor);
                     break;
+
             }
+
+            Picasso.with(getActivity())
+                    .load(photoFile)
+                    .resize(200, 200)
+                    .skipMemoryCache()
+                    .centerCrop()
+                    .into(mPhotoImageView);
+
         }
 
         @Override
