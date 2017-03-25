@@ -9,5 +9,7 @@
     <color name="colorPrimaryRed">#ed4545</color>
     <color name="colorPrimaryDarkRed">#d33c3c</color>
     <color name="colorAccentRed">#510b0b</color>
+    <color name="transRed">#B3ffe2e2</color>
+    <color name="transBlue">#B3FFFFFF</color>
 
 </resources>
