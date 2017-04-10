@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.UUID;
 
 
-public class TodoDetailedActivity extends AppCompatActivity {
+public class TodoDetailedActivity extends AppCompatActivity{
     public static final String EXTRA_TODO_ID = "com.example.olegsbogdanovs.todolist.crime_id";
 
     public static Intent createIntent(Context context, UUID todoId){
@@ -50,6 +50,5 @@ public class TodoDetailedActivity extends AppCompatActivity {
                     .commit();
         }
     }
-
 
 }

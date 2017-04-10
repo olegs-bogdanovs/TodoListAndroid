@@ -4,18 +4,25 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,7 +36,7 @@ import java.io.File;
 import java.util.UUID;
 
 
-public class TodoDetailedFragment extends Fragment {
+public class TodoDetailedFragment extends Fragment{
 
     private Todo mTodo;
     private EditText mTitleField;
@@ -37,6 +44,7 @@ public class TodoDetailedFragment extends Fragment {
     private RadioGroup mRadioGroup;
     private ImageView mPhotoView;
     private Button mPhotoButton;
+    private Button mSetColorButton;
     private File mPhotoFile;
     private static final int REQUEST_PHOTO = 0;
     private static final String TODO_ID = "todo_id";
@@ -71,7 +79,7 @@ public class TodoDetailedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detailed_todo, container, false);
-
+        setupUI(view);
         PackageManager packageManager = getActivity().getPackageManager();
 
         mTitleField = (EditText)view.findViewById(R.id.todo_title);
@@ -157,7 +165,7 @@ public class TodoDetailedFragment extends Fragment {
             Uri uri = Uri.fromFile(mPhotoFile);
             captureImage.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         }
-        mPhotoButton.setOnClickListener(new View.OnClickListener() {
+        mPhotoButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityForResult(captureImage, REQUEST_PHOTO);
@@ -170,8 +178,45 @@ public class TodoDetailedFragment extends Fragment {
         return view;
     }
 
+
+
     private void updatePhotoView() {
-        Picasso.with(getActivity()).load(mPhotoFile).resize(200,200).skipMemoryCache().centerCrop().into(mPhotoView);
+        // TODO: 3/30/2017 Check if file exists 
+        Picasso.with(getActivity())
+                .load(mPhotoFile)
+                .resize(200,200)
+                .skipMemoryCache()
+                .centerCrop()
+                .into(mPhotoView);
+    }
+
+    public void setupUI(View view) {
+        // Set up touch listener for non-text box views to hide keyboard.
+        if (!(view instanceof EditText)) {
+            view.setOnTouchListener(new OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard(getActivity());
+                    return false;
+                }
+            });
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                View innerView = ((ViewGroup) view).getChildAt(i);
+                setupUI(innerView);
+            }
+        }
+    }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(
+                // TODO: 3/30/2017 Null pointer exception
+                activity.getCurrentFocus().getWindowToken(), 0);
     }
 
     @Override

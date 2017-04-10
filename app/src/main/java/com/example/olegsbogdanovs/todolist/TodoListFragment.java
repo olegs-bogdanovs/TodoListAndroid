@@ -113,7 +113,7 @@ public class TodoListFragment extends Fragment {
             mDateTextView.setText(todo.getDate().toString());
             File photoFile = TodoListDao.get(getActivity()).getPhotoFile(todo);
 
-//            switch (todo.getColor()){
+//            switch (todmo.getColor()){
 //                case RED:
 //                    int redColor = ContextCompat.getColor(getActivity(), R.color.red);
 //                    mLinearLayout.setBackgroundColor(redColor);

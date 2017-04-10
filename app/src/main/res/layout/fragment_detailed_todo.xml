@@ -10,7 +10,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusableInTouchMode="true">
 
             <EditText
                 android:id="@+id/todo_title"
@@ -83,7 +84,6 @@
 
                 </RadioGroup>
 
-
             </LinearLayout>
 
             <LinearLayout
@@ -102,6 +102,7 @@
                 
                 <ImageView
                     android:id="@+id/todo_photo"
+                    android:layout_marginStart="16dp"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@android:color/darker_gray"
