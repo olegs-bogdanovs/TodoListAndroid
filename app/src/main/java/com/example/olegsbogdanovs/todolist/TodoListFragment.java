@@ -80,6 +80,7 @@ public class TodoListFragment extends Fragment {
                 Intent intent = TodoDetailedActivity.createIntent(getActivity(), todo.getId());
                 startActivity(intent);
                 return true;
+
             case R.id.menu_item_settings:
                 Intent prefIntent = new Intent(getActivity(), TodoPreferenceActivity.class);
                 getActivity().startActivityForResult(prefIntent, REQUEST_THEME_PREFERENCE_CHANGED);
@@ -92,10 +93,10 @@ public class TodoListFragment extends Fragment {
     private class TodoHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView mTitleTextView;
-        //private LinearLayout mLinearLayout;
         private TextView mDateTextView;
         private ImageView mPhotoImageView;
-        private Todo mtodo;
+        private ImageView mColorLineView;
+        private Todo mTodo;
 
         TodoHolder(View itemView) {
             super(itemView);
@@ -103,31 +104,31 @@ public class TodoListFragment extends Fragment {
             mTitleTextView = (TextView) itemView.findViewById(R.id.todo_list_item_title);
             mDateTextView = (TextView) itemView.findViewById(R.id.todo_list_item_date);
             mPhotoImageView = (ImageView) itemView.findViewById(R.id.todo_list_item_image_view);
-            //mLinearLayout = (LinearLayout) itemView;
+            mColorLineView = (ImageView) itemView.findViewById(R.id.todo_list_item_color_line);
 
         }
 
         void bindTodo(Todo todo){
-            mtodo = todo;
+            mTodo = todo;
             mTitleTextView.setText(todo.getTitle());
             mDateTextView.setText(todo.getDate().toString());
             File photoFile = TodoListDao.get(getActivity()).getPhotoFile(todo);
 
-//            switch (todmo.getColor()){
-//                case RED:
-//                    int redColor = ContextCompat.getColor(getActivity(), R.color.red);
-//                    mLinearLayout.setBackgroundColor(redColor);
-//                    break;
-//                case GREEN:
-//                    int greenColor = ContextCompat.getColor(getActivity(), R.color.green);
-//                    mLinearLayout.setBackgroundColor(greenColor);
-//                    break;
-//                case YELLOW:
-//                    int yellowColor = ContextCompat.getColor(getActivity(), R.color.yellow);
-//                    mLinearLayout.setBackgroundColor(yellowColor);
-//                    break;
-//
-//            }
+            switch (todo.getColor()){
+                case RED:
+                    int redColor = ContextCompat.getColor(getActivity(), R.color.red);
+                    mColorLineView.setBackgroundColor(redColor);
+                    break;
+                case GREEN:
+                    int greenColor = ContextCompat.getColor(getActivity(), R.color.green);
+                    mColorLineView.setBackgroundColor(greenColor);
+                    break;
+                case YELLOW:
+                    int yellowColor = ContextCompat.getColor(getActivity(), R.color.yellow);
+                    mColorLineView.setBackgroundColor(yellowColor);
+                    break;
+
+            }
 
             Picasso.with(getActivity())
                     .load(photoFile)
@@ -140,7 +141,7 @@ public class TodoListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = TodoDetailedActivity.createIntent(getActivity(), mtodo.getId());
+            Intent intent = TodoDetailedActivity.createIntent(getActivity(), mTodo.getId());
             startActivity(intent);
         }
     }

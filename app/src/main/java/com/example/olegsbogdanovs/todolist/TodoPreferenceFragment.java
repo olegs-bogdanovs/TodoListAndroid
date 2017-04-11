@@ -8,9 +8,7 @@ import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-/**
- * Created by olegs.bogdanovs on 3/20/2017.
- */
+
 
 public class TodoPreferenceFragment extends PreferenceFragment{
     public static final String RESPONSE_THEME_PREFERENCE_CHANGED = "pref_changed";

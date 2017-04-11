@@ -73,6 +73,7 @@ public class TodoDetailedFragment extends Fragment{
     @Override
     public void onPause() {
         super.onPause();
+        // TODO: 4/11/2017 Update in AsyncTask 
         TodoListDao.get(getActivity()).updateTodo(mTodo);
     }
 
@@ -181,7 +182,6 @@ public class TodoDetailedFragment extends Fragment{
 
 
     private void updatePhotoView() {
-        // TODO: 3/30/2017 Check if file exists 
         Picasso.with(getActivity())
                 .load(mPhotoFile)
                 .resize(200,200)
