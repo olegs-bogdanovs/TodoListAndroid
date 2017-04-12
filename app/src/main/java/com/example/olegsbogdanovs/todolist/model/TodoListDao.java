@@ -52,7 +52,7 @@ public class TodoListDao {
     }
 
     public void removeTodo(Todo todo) {
-        // TODO: 3/30/2017 Remove PhotoFile
+        // TODO: 3/30/2017 Remove PhotoFile if exists
         String id = todo.getId().toString();
         mDatabase.delete(
                 TodoTable.NAME,

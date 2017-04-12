@@ -1,14 +1,13 @@
 package com.example.olegsbogdanovs.todolist;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,14 +15,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.olegsbogdanovs.todolist.model.Todo;
 import com.example.olegsbogdanovs.todolist.model.TodoListDao;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.util.List;
@@ -36,12 +35,22 @@ public class TodoListFragment extends Fragment {
     public static final String GREEN = "green";
     public static final String YELLOW = "yellow";
     public static final int REQUEST_THEME_PREFERENCE_CHANGED = 10;
+    private FirebaseAuth mAuth;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        mAuth = FirebaseAuth.getInstance();
+
+        if (getActivity() instanceof AppCompatActivity){
+            AppCompatActivity activity = (AppCompatActivity)getActivity();
+            FirebaseUser user = mAuth.getCurrentUser();
+            if (activity.getSupportActionBar() != null && user != null){
+                activity.getSupportActionBar().setSubtitle(user.getEmail());
+            }
+        }
 
     }
 
@@ -80,11 +89,15 @@ public class TodoListFragment extends Fragment {
                 Intent intent = TodoDetailedActivity.createIntent(getActivity(), todo.getId());
                 startActivity(intent);
                 return true;
-
             case R.id.menu_item_settings:
                 Intent prefIntent = new Intent(getActivity(), TodoPreferenceActivity.class);
                 getActivity().startActivityForResult(prefIntent, REQUEST_THEME_PREFERENCE_CHANGED);
                 return true;
+            case R.id.menu_item_logout:
+                mAuth.signOut();
+                Intent authIntent = new Intent(getActivity(), AuthActivity.class);
+                startActivity(authIntent);
+                getActivity().finish();
         }
         return super.onOptionsItemSelected(item);
     }
