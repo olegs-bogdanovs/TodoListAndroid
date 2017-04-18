@@ -3,6 +3,7 @@ package com.example.olegsbogdanovs.todolist;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -27,12 +28,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.olegsbogdanovs.todolist.model.Todo;
 import com.example.olegsbogdanovs.todolist.model.TodoListDao;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -45,6 +48,7 @@ public class TodoDetailedFragment extends Fragment{
     private ImageView mPhotoView;
     private Button mPhotoButton;
     private Button mSetColorButton;
+    private Button mTweetButton;
     private File mPhotoFile;
     private static final int REQUEST_PHOTO = 0;
     private static final String TODO_ID = "todo_id";
@@ -175,6 +179,36 @@ public class TodoDetailedFragment extends Fragment{
 
         mPhotoView = (ImageView) view.findViewById(R.id.todo_photo);
         updatePhotoView();
+
+        mTweetButton = (Button) view.findViewById(R.id.todo_button_tweet);
+        mTweetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent tweetIntent = new Intent(Intent.ACTION_SEND);
+                tweetIntent.putExtra(Intent.EXTRA_TEXT, mTodo.getTitle() + " " + mTodo.getDescription());
+                tweetIntent.setType("text/plain");
+
+                PackageManager packageManager = getActivity().getPackageManager();
+                List<ResolveInfo> resolveInfoList = packageManager
+                        .queryIntentActivities(tweetIntent, PackageManager.MATCH_DEFAULT_ONLY);
+
+                boolean resolved = false;
+                for(ResolveInfo resolveInfo: resolveInfoList){
+                    if(resolveInfo.activityInfo.packageName.startsWith("com.twitter.android")){
+                        tweetIntent.setClassName(
+                                resolveInfo.activityInfo.packageName,
+                                resolveInfo.activityInfo.name );
+                        resolved = true;
+                        break;
+                    }
+                }
+                if(resolved){
+                    startActivity(tweetIntent);
+                }else{
+                    Toast.makeText(getActivity(), "Twitter app isn't found", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         return view;
     }

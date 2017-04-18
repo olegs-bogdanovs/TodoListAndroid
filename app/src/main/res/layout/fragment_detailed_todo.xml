@@ -116,6 +116,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/take_photo"/>
 
+                <Button
+                    android:id="@+id/todo_button_tweet"
+                    android:layout_marginStart="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tweet"/>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
